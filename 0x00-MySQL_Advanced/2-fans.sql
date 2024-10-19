@@ -1,6 +1,5 @@
 -- task2
--- Best band ever!
-
+-- Best band ever
 
 SELECT 
     origin,
@@ -8,6 +7,6 @@ SELECT
 FROM 
     metal_bands
 GROUP BY 
-    origin;
-ORDER BY
-    nb_fans
+    origin
+ORDER BY 
+    nb_fans DESC;
