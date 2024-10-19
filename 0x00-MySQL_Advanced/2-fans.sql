@@ -3,8 +3,11 @@
 
 SELECT
 	origin,
-	Distinct fans AS nb_fans
+	SUM(fans) AS nb_fans
 FROM
 	metal_bands
+GROUP BY
+	origin
 ORDER BY
-	fans DESC;
+	nb_fans DESC;
+
