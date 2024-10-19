@@ -3,7 +3,7 @@
 
 SELECT
 	origin,
-	fans AS nb_fans
+	Distinct fans AS nb_fans
 FROM
 	metal_bands
 ORDER BY
