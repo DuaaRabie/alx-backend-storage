@@ -3,13 +3,10 @@
 
 SELECT
 	band_name,
-	IFNULL(
-		DATEDIFF(2022, COALESCE(split, '2022')),
-		DATEDIFF(2022, formed)
-	) as lifespan
+	COALESCE(split - formed, 2022 - formed) as lifespan
 FROM
 	metal_bands
 WHERE
-	style = 'Glam rock'
+	style LIKE '%Glam rock%'
 ORDER BY
 	lifespan DESC;
