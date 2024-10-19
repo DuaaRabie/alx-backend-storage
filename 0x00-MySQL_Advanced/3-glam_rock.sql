@@ -3,7 +3,10 @@
 
 SELECT
 	band_name,
-	DATEDIFF(formed, COALESCE(split, '2022')) as lifespan
+	IFNULL(
+		DATEDIFF(formed, COALESCE(split, '2022')),
+		DATEDIFF(2022, formed)
+	) as lifespan
 FROM
 	metal_bands
 WHERE
