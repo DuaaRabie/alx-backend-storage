@@ -4,7 +4,7 @@
 SELECT
 	band_name,
 	IFNULL(
-		DATEDIFF(formed, COALESCE(split, '2022')),
+		DATEDIFF(2022, COALESCE(split, '2022')),
 		DATEDIFF(2022, formed)
 	) as lifespan
 FROM
