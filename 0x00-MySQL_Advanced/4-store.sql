@@ -7,10 +7,10 @@ START TRANSACTION;
 -- Create the trigger
 DELIMITER //
 CREATE TRIGGER update_item_quantity_after_order
-AFTER INSERT ON order
+AFTER INSERT ON orders
 FOR EACH ROW
 BEGIN
-   UPDATE items SET quantity = quatinty - NEW.number WHERE naem = NEW.item_name
+   UPDATE items SET quantity = quantity - NEW.number WHERE name = NEW.item_name;
 END;//
 DELIMITER ;
 
