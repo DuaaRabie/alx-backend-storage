@@ -7,7 +7,7 @@ CREATE PROCEDURE ComputeAverageScoreForUser(
 	IN user_id INT
 )
 BEGIN
-	DECLARE average_score DECIMAL(5, 2);
+	DECLARE average_score DECIMAL;
 
 	SELECT SUM(score) / COUNT(*) INTO average_score
 	FROM corrections WHERE user_id = user_id;
