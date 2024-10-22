@@ -4,5 +4,5 @@
 
 def insert_school(mongo_collection, **kwargs):
     """ insert document in a mango collection based on kwargs"""
-    result = mongo_collection.insert_many(kwargs);
+    result = mongo_collection.insert_one(kwargs);
     return str(result.inserted_id);
