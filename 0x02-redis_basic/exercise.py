@@ -30,7 +30,6 @@ class Cache:
                 return fn(data)
             else:
                 return None
-            return converted
         except ValueError:
             raise ValueError
 
