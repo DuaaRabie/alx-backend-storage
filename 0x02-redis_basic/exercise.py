@@ -6,6 +6,17 @@ import uuid
 from typing import Union, Optional, Callable
 
 
+def count_calls(fn: Callable) -> Callable:
+        """ Decorator to count how many times a method is called"""
+        @wraps(fn)
+        def wrapper(self, *args, **kwargs):
+            # Use the qualified name of the method as the Redis key
+            method_key = f"{self.__class__.__name__}.{fn.__qualname__}"
+            self._redis.incr(method_key)
+            return fn(self, *args, **kwargs)
+        return wrapper
+
+
 class Cache:
     """ cache redis class """
     def __init__(self):
