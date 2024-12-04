@@ -7,16 +7,16 @@ from typing import Union, Optional, Callable, Any
 from functools import wraps
 
 
-def count_calls(fn: Callable[..., Any]) -> Callable[..., Any]:
+def count_calls(method: Callable[..., Any]) -> Callable[..., Any]:
     """ Decorator to count how many times a method is called"""
-    @wraps(fn)
+    @wraps(method)
     def wrapper(self, *args, **kwargs) -> Callable:
         # Use the qualified name of the method as the Redis key
-        method_key = f"{fn.__qualname__}"
+        method_key = f"{method.__qualname__}"
         if self._redis.get(method_key) is None:
             self._redis.set(method_key, 0)
         self._redis.incr(method_key)
-        return fn(self, *args, **kwargs)
+        return method(self, *args, **kwargs)
     return wrapper
 
 
