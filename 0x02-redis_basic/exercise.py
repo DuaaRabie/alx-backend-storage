@@ -27,7 +27,7 @@ class Cache:
             return None
         try:
             if fn:
-                return fn(data)
+                return fn(data.decode("utf-8"))
             else:
                 return None
         except ValueError:
