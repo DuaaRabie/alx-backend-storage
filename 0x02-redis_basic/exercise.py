@@ -29,7 +29,7 @@ class Cache:
             if fn:
                 return fn(data.decode('utf-8'))
             else:
-                return data.decode('utf-8')
+                return None
             return converted
         except ValueError:
             return value
