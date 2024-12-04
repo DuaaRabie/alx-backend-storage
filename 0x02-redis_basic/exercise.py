@@ -3,13 +3,13 @@
 
 import redis
 import uuid
-from typing import Union, Optional, Callable
-import functools
+from typing import Union, Optional, Callable, Any
+from functools import wraps
 
 
-def count_calls(fn: Callable) -> Callable:
+def count_calls(fn: Callable[..., Any]) -> Callable[..., Any]:
     """ Decorator to count how many times a method is called"""
-    @functools.wraps(fn)
+    @wraps(fn)
     def wrapper(self, *args, **kwargs) -> Callable:
         # Use the qualified name of the method as the Redis key
         method_key = f"{fn.__qualname__}"
