@@ -26,10 +26,11 @@ class Cache:
         if data is None:
             return None
         try:
+            if fn:
             converted = fn(data)
             return converted
         except ValueError:
-            return get_int(data)
+            return value
 
     def get_str(self, key: str) -> str:
         """ Retrieve the value and decode it to a string """
