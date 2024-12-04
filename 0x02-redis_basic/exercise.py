@@ -25,9 +25,10 @@ class Cache:
         data = self._redis.get(key)
         if data is None:
             return None
-        if fn:
-            return fn(data)
-        return data
+        try:
+            fn(data)
+        except ValueError:
+            return get_int(data)
 
     def get_str(self, key: str) -> str:
         """ Retrieve the value and decode it to a string """
