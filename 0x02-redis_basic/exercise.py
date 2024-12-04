@@ -26,7 +26,8 @@ class Cache:
         if data is None:
             return None
         try:
-            fn(data)
+            converted = fn(data)
+            return converted
         except ValueError:
             return get_int(data)
 
