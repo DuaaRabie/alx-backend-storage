@@ -19,7 +19,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[Callable]) ->\
+    def get(self, key: str, fn: Optional[Callable] = None) ->\
             Union[bytes, str, int, float, None]:
         """ convert data to desired format using Callable """
         data = self._redis.get(key)
@@ -32,7 +32,7 @@ class Cache:
                 return None
             return converted
         except ValueError:
-            return value
+            raise ValueError
 
     def get_str(self, key: str) -> str:
         """ Retrieve the value and decode it to a string """
