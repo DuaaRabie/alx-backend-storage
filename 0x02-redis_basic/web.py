@@ -40,8 +40,8 @@ def get_page(url: str) -> str:
 # Testing the functionality with a slow URL to simulate caching
 if __name__ == "__main__":
     # Use the slowwly URL to simulate slow response
-    url =
-    "http://slowwly.robertomurray.co.uk/delay/1000/url/http://example.com"
+    url =\
+        "http://slowwly.robertomurray.co.uk/delay/1000/url/http://google.com"
     # Access the page multiple times
     print(get_page(url))  # Fetch and cache the page content
     time.sleep(1)
