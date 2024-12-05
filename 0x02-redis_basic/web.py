@@ -7,6 +7,7 @@ import time
 from functools import wraps
 from typing import Callable
 
+
 # Create a Redis client
 redis_client = redis.Redis()
 
@@ -46,5 +47,7 @@ if __name__ == "__main__":
     print(get_page(url))  # Fetch and cache the page content
     time.sleep(1)
     print(get_page(url))  # Fetch from cache after 1 second
-    time.sleep(11)
+    time.sleep(9)
     print(get_page(url))  # Cache expires, fetch again
+    access_count = redis_client.get(f"count:{url}")
+    print(f"The URL '{url}' was accessed {int(access_count)} times.")
