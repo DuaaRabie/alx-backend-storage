@@ -5,16 +5,16 @@ import redis
 import requests
 import time
 from functools import wraps
-
+from typing import Callable
 
 # Create a Redis client
 redis_client = redis.Redis()
 
 
-def count_and_cache(fn):
+def count_and_cache(fn: Callable) -> Callable:
     """Decorator to count access and cache the result"""
     @wraps(fn)
-    def wrapper(url: str):
+    def wrapper(url: str) -> str:
         # Increment the count for this URL
         redis_client.incr(f"count:{url}")
 
@@ -25,7 +25,7 @@ def count_and_cache(fn):
 
         # If not cached, fetch the page, cache it and set expiration
         page_content = fn(url)
-        redis_client.setex(url, 10, page_content)
+        redis_client.psetex(url, 10000, page_content)
         return page_content
     return wrapper
 
@@ -46,5 +46,5 @@ if __name__ == "__main__":
     print(get_page(url))  # Fetch and cache the page content
     time.sleep(1)
     print(get_page(url))  # Fetch from cache after 1 second
-    time.sleep(9)
+    time.sleep(11)
     print(get_page(url))  # Cache expires, fetch again
