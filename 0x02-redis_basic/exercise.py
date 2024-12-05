@@ -12,10 +12,7 @@ def count_calls(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs) -> Callable:
         # Use the qualified name of the method as the Redis key
-        method_key = method.__qualname__
-        if self._redis.get(method_key) is None:
-            self._redis.set(method_key, 0)
-        self._redis.incr(method_key)
+        self._redis.incr(method.__qualname__)
         return method(self, *args, **kwargs)
     return wrapper
 
